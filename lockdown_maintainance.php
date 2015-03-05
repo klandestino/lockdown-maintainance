@@ -80,7 +80,7 @@ class Maintainance_Lockdown_Core {
 		$this->settings->init();
 
 		// Use GET variables to switch on/off maintainance lockdown
-		if ( isset( $_GET[ 'enable-maintainance' ] ) ) {
+		if ( is_admin() && isset( $_GET[ 'enable-maintainance' ] ) ) {
 			if ( 'true' === $_GET[ 'enable-maintainance' ] ) {
 				$this->lockdown_maintainance_timer_activate();
 			} else {
@@ -93,7 +93,7 @@ class Maintainance_Lockdown_Core {
 	}
 
 	function maintainance_lockdown_settings_save() {
-		if ( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ) {
+		if ( is_admin() && isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] ) {
 			//plugin settings have been saved.
 			if ( get_option( 'maintainance_lockdown_enabled' ) ) {
 				$this->lockdown_maintainance_timer_activate();
